@@ -147,7 +147,12 @@ Abstraction layer between the user and the program. Can ask questions and get an
 
 ## Parser
 
-Parses input files, that have the following styling rules: - Repeats nested by 4 spaces - White lines ignored - One space between command and property with nothing following afterwards - Ran top to bottom
+Parses input files, that have the following styling rules:
+
+- Repeats nested by 4 spaces
+- White lines ignored
+- One space between command and property with nothing following afterwards
+- Ran top to bottom
 
 ## EntryPoint
 
