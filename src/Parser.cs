@@ -13,7 +13,7 @@ namespace BasicScratchApp
             else if (command.StartsWith("Turn"))
             {
                 var parts = command.Split(' ', 3);
-                var direction = parts[1] == "left" ? TurnDirection.Left : TurnDirection.Right;
+                var direction = parts[1] == "Left" ? TurnDirection.Left : TurnDirection.Right;
                 return new TurnCommand(direction);
             }
             // Repeat parsed in it's s own function
