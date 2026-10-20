@@ -20,7 +20,7 @@ namespace BasicScratchApp
             ])
         ]);
 
-        public static Program ExportProgram { get; } = new([
+        public static Program ExpertProgram { get; } = new([
             new MoveCommand(5),
             new TurnCommand(TurnDirection.Left),
             new TurnCommand(TurnDirection.Left),

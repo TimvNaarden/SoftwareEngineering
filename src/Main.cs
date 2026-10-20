@@ -11,8 +11,8 @@ namespace BasicScratchApp
             { "Advanced",  () => Examples.AdvancedProgram},
             { "1",  () => Examples.AdvancedProgram},
 
-            { "Expert",  () => Examples.ExportProgram},
-            { "2",  () => Examples.ExportProgram},
+            { "Expert",  () => Examples.ExpertProgram},
+            { "2",  () => Examples.ExpertProgram},
 
             { "Input File",  () => Parser.ParseFile(UserInput.AskQuestion("Enter the path to the input file: "))},
             { "3",  () => Parser.ParseFile(UserInput.AskQuestion("Enter the path to the input file: "))}

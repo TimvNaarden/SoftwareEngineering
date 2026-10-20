@@ -13,7 +13,7 @@ namespace BasicScratchApp
             else if (command.StartsWith("Turn"))
             {
                 var parts = command.Split(' ', 3);
-                var direction = parts[1] == "Left" ? TurnDirection.Left : TurnDirection.Right;
+                var direction = parts[1] == "left" ? TurnDirection.Left : TurnDirection.Right;
                 return new TurnCommand(direction);
             }
             // Repeat parsed in it's s own function
@@ -38,15 +38,17 @@ namespace BasicScratchApp
                 if (line.StartsWith("    ")) // In repeat
                 {
                     subCommands += string.Concat(line.AsSpan(4), "\n");
+                    continue;
                 }
-                else if (subCommands != "") // Repeat stopped
+                if (subCommands != "") // Repeat stopped
                 {
                     var command = ParseRepeat(repeatCount, subCommands);
                     commands.Add(command);
                     subCommands = "";
                     repeatCount = 0;
                 }
-                else if (line.StartsWith("Repeat")) // Start repeat
+
+                if (line.StartsWith("Repeat")) // Start repeat
                 {
                     var parts = line.Split(' ', 3);
                     repeatCount = int.Parse(parts[1]);

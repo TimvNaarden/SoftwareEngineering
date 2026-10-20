@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace BasicScratchApp.UnitTests
 {
     // Tests can be ran using 'dotnet test BasicScratchApp.UnitTests'
