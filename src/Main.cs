@@ -19,10 +19,21 @@ namespace BasicScratchApp
         };
         readonly static string exampleProgramSelectionPrompt = "Select an program to run (Basic(0), Advanced(1), Expert(2), Input File(3)): ";
         readonly static string metricOrRun = "Do you want to run the program(0) or print the metrics(1)? ";
-        private static void Main(string[] args)
+        private static void Main()
         {
-            Program selected = UserInput.AskQuestion(exampleProgramSelectionPrompt, exampleProgramSelections, () => Console.WriteLine("Input not recognized, selecting Basic"))();
-
+            Program selected;
+            while (true)
+            {
+                try
+                {
+                    selected = UserInput.AskQuestion(exampleProgramSelectionPrompt, exampleProgramSelections)();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
             // Computed here with selected option
             Dictionary<string, Action> extractUserAction = new()
             {
@@ -30,7 +41,19 @@ namespace BasicScratchApp
                 {"1", () => Console.WriteLine(selected.Statistics())}
             };
 
-            Action extractedAction = UserInput.AskQuestion(metricOrRun, extractUserAction, () => Console.WriteLine("Input not recognized, running the program"));
+            Action extractedAction;
+            while (true)
+            {
+                try
+                {
+                    extractedAction = UserInput.AskQuestion(metricOrRun, extractUserAction);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
 
             extractedAction();
         }

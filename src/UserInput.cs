@@ -10,8 +10,8 @@ namespace BasicScratchApp
             else throw new ArgumentException("Input was null");
         }
 
-        // When a user selects a non-existing option, the first option is selected and onError is called. 
-        public static T AskQuestion<T>(string question, Dictionary<string, T> actions, Action onError)
+        // When a user selects a non-existing option, throws KeyNotFound
+        public static T AskQuestion<T>(string question, Dictionary<string, T> actions)
         {
             Console.Write(question);
             var input = Console.ReadLine();
@@ -21,8 +21,7 @@ namespace BasicScratchApp
             }
             else
             {
-                onError();
-                return actions.First().Value;
+                throw new KeyNotFoundException("Input not recognized");
             }
         }
     }
