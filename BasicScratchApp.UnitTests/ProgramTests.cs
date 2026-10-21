@@ -1,25 +1,43 @@
+
 namespace BasicScratchApp.UnitTests
 {
-    // Tests can be ran using 'dotnet test BasicScratchApp.UnitTests'
-    // Any file in this folder will be ran
-    // It can import any class/method from BasicScratchApp, that are public. 
     public class ProgramTests
     {
-        // This test runs one time 
         [Fact]
-        public void BasicProgram()
+        public void BasicProgramStatisticsTest()
         {
-            Assert.Equal(1, 1);
+            Assert.Equal(
+                "Number of commands: 8\nMax nesting: 0\nNumber of repeats: 0",
+                Examples.BasicProgram.Statistics()
+            );
         }
 
-        //This test runs for every [InlineData(x,y,z)] entry once        
-        [Theory]
-        [InlineData(1, 2, 3)] // BasicTheoryTest(1,2,3)
-        [InlineData(4, 1, 5)] // BasicTheoryTest(1,4,5)
-        public void BasicTheoryTest(int arg1, int arg2, int arg3)
+        [Fact]
+        public void AdvancedProgramStatisticsTest()
         {
-            Assert.Equal(arg1 + arg2, arg3);
-            Assert.InRange(arg2, arg1, arg3); // fails on second entry. 1 is not in range 4-5
+            Assert.Equal(
+                "Number of commands: 3\nMax nesting: 1\nNumber of repeats: 1",
+                Examples.AdvancedProgram.Statistics()
+            );
         }
+
+        [Fact]
+        public void ExpertProgramStatisticsTest()
+        {
+            Assert.Equal(
+                "Number of commands: 11\nMax nesting: 2\nNumber of repeats: 2",
+                Examples.ExpertProgram.Statistics()
+            );
+        }
+        
+        [Fact]
+        public void BasicProgramToStringTest()
+        {
+            Assert.Equal(
+                "Move 10, Turn Right, Move 10, Turn Right, Move 10, Turn Right, Move 10, Turn Right.\n(0, 0) facing East",
+                Examples.BasicProgram.ToString()
+            );
+        }
+
     }
 }
