@@ -36,7 +36,7 @@ namespace BasicScratchApp
 
         private int NumberOfRepeats()
         {
-            int[] numberOfRepeats = [.. _commands.Select(com => com is RepeatCommand repeat ? repeat.NumberOfRepeats() : 0)];
+            int[] numberOfRepeats = [.. _commands.Select(com => com.NumberOfRepeats())];
             return numberOfRepeats.Sum();
         }
 
