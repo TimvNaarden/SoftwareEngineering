@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Software Engineering.csproj" />
+    <ProjectReference Include="..\BasicScratchApp.csproj" />
   </ItemGroup>
 
 </Project>

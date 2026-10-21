@@ -2,5 +2,5 @@
   <Folder Name="/BasicScratchApp.UnitTests/">
     <Project Path="BasicScratchApp.UnitTests/BasicScratchApp.UnitTests.csproj" />
   </Folder>
-  <Project Path="Software Engineering.csproj" />
+  <Project Path="BasicScratchApp.csproj" />
 </Solution>

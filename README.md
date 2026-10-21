@@ -7,7 +7,7 @@ Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
 From the root of the repository:
 
 ```
-dotnet run --project "Software Engineering.csproj"
+dotnet run
 ```
 
 Choose one of the example programs or load your own input file (for example `input.txt`), then choose to run the program or print the metrics.
@@ -17,5 +17,5 @@ Choose one of the example programs or load your own input file (for example `inp
 From the root of the repository:
 
 ```
-dotnet test BasicScratchApp.UnitTests
+dotnet test
 ```
