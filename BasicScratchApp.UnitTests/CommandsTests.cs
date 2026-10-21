@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace BasicScratchApp.UnitTests
 {
     public class CommandsTests
@@ -54,10 +52,49 @@ namespace BasicScratchApp.UnitTests
             RepeatCommand repeat = new RepeatCommand(3, [
                 new MoveCommand(10), 
                 new TurnCommand(TurnDirection.Left)
-                ]);
+            ]);
             Position start = new Position(0, 0, Direction.East);
             Position end = repeat.Move(start);
             Assert.Equal(new Position(0, 10, Direction.South), end);
+        }
+
+        // Test the number of commands 
+       [Fact]
+        public void NumberOfCommandsTest()
+        {
+            RepeatCommand repeat = new RepeatCommand(5, [
+                new MoveCommand(10),
+                new TurnCommand(TurnDirection.Left)
+            ]);
+            Assert.Equal(3, repeat.NumberOfCommands());
+        }
+
+        // Test max nesting on a repeat command
+        [Fact]
+        public void MaxNestingTest()
+        {
+            RepeatCommand repeat = new RepeatCommand(5, [
+                new MoveCommand(10),
+                new TurnCommand(TurnDirection.Left),
+                new RepeatCommand(3, [
+                    new MoveCommand(5),
+                    new TurnCommand(TurnDirection.Right)
+                ]) 
+            ]);
+            Assert.Equal(2, repeat.MaxNesting());
+        }
+
+        // Test number of repeats on a repeat command
+        [Fact]
+        public void NumberOfRepeatsTest()
+        {
+            RepeatCommand repeat = new RepeatCommand(3, [
+                new TurnCommand(TurnDirection.Left),
+                new RepeatCommand(3, [
+                    new MoveCommand(10)
+                    ])
+            ]);
+            Assert.Equal(2, repeat.NumberOfRepeats());
         }
     }
 }
