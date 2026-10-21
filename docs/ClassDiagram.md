@@ -75,49 +75,64 @@ classDiagram
     }
 
     class Parser {
+        -Dictionary~string, IFileParser~ _parsers$
+        +ParseFile(string path)$ Program
+        +Parse(string src, string type)$ Program
+    }
+
+    class IFileParser {
+        <<interface>>
+        +ParseFile(string path)* Program
+        +Parse(string text)* Program
+    }
+
+    class TextParser {
         -ParseCommand(string command)$ ICommand
         -ParseRepeat(int times, string commands)$ RepeatCommand
         -ParseInner(string input)$ List~ICommand~
-        +Parse(string input)$ Program
-        +ParseFile(string path)$ Program
+        +Parse(string input) Program
+        +ParseFile(string path) Program
     }
 
     class UserInput {
         <<static>>
         +AskQuestion(string question)$ string
-        +AskQuestion~T~(string question, Dictionary~string, T~ actions, Action onError)$ T
+        +AskQuestion~T~(string question, Dictionary~string, T~ actions)$ T
     }
 
     class Examples {
         <<static>>
         +Program BasicProgram$
         +Program AdvancedProgram$
-        +Program ExportProgram$
+        +Program ExpertProgram$
     }
 
     class EntryPoint {
         -Dictionary~string, Func~Program~~ exampleProgramSelections$
         -string exampleProgramSelectionPrompt$
         -string metricOrRun$
-        -Main(string[] args)$ void
+        -Main()$ void
     }
 
     %% Realization
     ICommand <|.. MoveCommand
     ICommand <|.. TurnCommand
     ICommand <|.. RepeatCommand
+    IFileParser <|.. TextParser
 
     %% Structure
     RepeatCommand o-- "*" ICommand : _commands
     Program o-- "*" ICommand : _commands
     Position --> Direction : D
     TurnCommand --> TurnDirection : _d
+    Parser o-- "*" IFileParser : _parsers
 
     %% Usage
     ICommand ..> Position : moves
     Program ..> Position : Start / End
-    Parser ..> ICommand : creates
-    Parser ..> Program : creates
+    Parser ..> Program : returns
+    TextParser ..> ICommand : creates
+    TextParser ..> Program : creates
     Examples --> Program
     EntryPoint ..> Examples
     EntryPoint ..> Parser
@@ -147,7 +162,16 @@ Abstraction layer between the user and the program. Can ask questions and get an
 
 ## Parser
 
-Parses input files, that have the following styling rules:
+Entry point for parsing files. Keeps a dictionary that maps a file extension to an `IFileParser` and passes the file to the parser for that extension.
+Throws a `KeyNotFoundException` when the extension is not supported. A new file format can be added by implementing `IFileParser` and registering it in `_parsers`.
+
+## IFileParser
+
+Interface for a parser of one file format. `ParseFile` reads the file from a path, `Parse` turns the file contents into a `Program`.
+
+## TextParser
+
+Implementation of `IFileParser` for `.txt` files, that have the following styling rules:
 
 - Repeats nested by 4 spaces
 - White lines ignored
