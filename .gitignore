@@ -2,3 +2,4 @@
 **/obj/
 .netcoredbg_hist
 input.txt
+.vs
